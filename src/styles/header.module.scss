@@ -1,0 +1,9 @@
+@import "./Mixins";
+@import "./Variables";
+
+.header {
+  @include flex-mother(row, flex-start, center);
+  width: 100%;
+  height: $headerHeight;
+  padding: 0 20px;
+}
