@@ -2,8 +2,17 @@
 @import "./Variables";
 
 .header {
-  @include flex-mother(row, flex-start, center);
+  @include flex-mother(row, space-between, center);
   width: 100%;
   height: $headerHeight;
   padding: 0 20px;
+  span{
+    max-width: 300px;
+    padding: 4px;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 5px;
+    font-size: .7rem;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+  }
 }

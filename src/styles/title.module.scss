@@ -1,0 +1,24 @@
+@import "./Mixins";
+@import "./Variables";
+
+.title{
+  @include flex-mother(column,center,center);
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 10px 0;
+  border-bottom: 1px solid $colorFirst;
+  font-size: 1.2rem;
+  div{
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    span{
+      display: inline-block;
+      margin: 5px 0;
+      font-weight: bold;
+    }
+  }
+}
+
+.case-parameters{
+
+}

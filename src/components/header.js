@@ -1,6 +1,6 @@
 import React from 'react';
 import Img from 'gatsby-image';
-import {useStaticQuery, graphql} from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 
 //Styles
 import headerStyles from '../styles/header.module.scss';
@@ -17,11 +17,14 @@ const Header = () => {
       }
     }
   }`);
-  return ( 
-  <header className={headerStyles.header}>
-      <Img fixed={data.file.childImageSharp.fixed}/>
-  </header> 
+  return (
+    <header className={headerStyles.header}>
+      <Img fixed={data.file.childImageSharp.fixed} />
+      <span>
+        Zaprojektowanie i budowa drogi ekspresowej S52 odc. Północna Obwodnica Krakowa Węzeł Modlnica - Węzeł Mistrzejowice (bez węzła)
+      </span>
+    </header>
   );
 }
- 
+
 export default Header;
