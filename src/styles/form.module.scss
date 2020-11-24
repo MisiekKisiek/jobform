@@ -4,15 +4,16 @@
 .form {
   @include flex-mother(column, flex-start, center);
   height: calc(100vh - $headerHeight);
-  >div:last-of-type {
+  > div:last-of-type {
     @include flex-mother(row, center, center);
     max-width: 600px;
     margin-top: 20px;
   }
   h3 {
+    margin: 10px 0;
     font-family: "Courier New", Courier, monospace;
   }
-  >div {
+  > div {
     @include flex-mother(column, flex-start, flex-start);
     min-height: 60px;
     margin: 10px 0;
@@ -59,14 +60,14 @@
     background-color: $colorSecond;
     color: black;
     transition: 0.2s;
-    &:active{
+    &:active {
       outline: none;
       outline-offset: 0;
       color: white;
       border-color: white;
     }
-    &:active{
-      transform: translate(0,2%);
+    &:active {
+      transform: translate(0, 2%);
     }
     cursor: pointer;
     &:hover {
@@ -74,12 +75,12 @@
       border-color: $colorFirst;
       color: white;
     }
-    >div{
+    > div {
       display: none;
       margin: auto;
     }
-    span{
-      display:block;
+    span {
+      display: block;
     }
   }
 }
