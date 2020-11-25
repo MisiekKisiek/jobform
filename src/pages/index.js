@@ -31,7 +31,7 @@ const MainPage = () => {
         <span>{caseNumber}</span>
       </div>
     </div>
-    <MainForm />
+    <MainForm title={caseTitle} number={caseNumber} />
   </main>);
 }
 

@@ -10,6 +10,10 @@
     margin-top: 20px;
   }
   h3 {
+    margin: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    font-size: 1.3rem;
+    font-weight: bold;
     font-family: "Courier New", Courier, monospace;
   }
   >div {
@@ -19,8 +23,9 @@
     font-family: "Courier New", Courier, monospace;
     label {
       display: block;
+      margin: 0;
       flex-basis: 15px;
-      line-height: 20%;
+      line-height: 10%;
       font-size: 1rem;
     }
     input,
