@@ -18,6 +18,7 @@
   }
   >div {
     @include flex-mother(column, flex-start, flex-start);
+    position: relative;
     min-height: 60px;
     margin: 10px 0;
     font-family: "Courier New", Courier, monospace;
@@ -87,4 +88,19 @@
       display:block;
     }
   }
+}
+
+.helper{
+    position: absolute;
+    top: -10px;
+    right: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid rgba(0,0,0,.4);
+    border-radius: 50%;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import emailjs from 'emailjs-com';
 
 //Bootstrap
@@ -49,9 +49,10 @@ const MainForm = ({ title, number }) => {
 
   const hoursTooltip = (
     <OverlayTrigger trigger="click" placement="right" overlay={hoursPopover}>
-      <span>?</span>
+      <span className={formStyles.helper}>?</span>
     </OverlayTrigger>
   )
+
   return (
     <form onSubmit={formik.handleSubmit} className={formStyles.form}>
       <h3>Dane projektanta</h3>
@@ -93,9 +94,9 @@ const MainForm = ({ title, number }) => {
       </div>
       <h3>Wywiad prac dodatkowych</h3>
       <div>
+        {hoursTooltip}
         <label htmlFor="hours">
-          Ilość godzin
-          {hoursTooltip}:
+          Ilość godzin:
         </label>
         <input
           id="hours"
