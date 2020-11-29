@@ -1,15 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import emailjs from 'emailjs-com';
+import {uid} from 'uid';
 
 //Bootstrap
-import { Form as FormBootstrap, Spinner, OverlayTrigger, Popover, Button } from 'react-bootstrap';
+import { Form as FormBootstrap, Spinner } from 'react-bootstrap';
+
+//Components
+import Helper from './helper';
+import HoursInputs from './hoursInput'
 
 //Styles
-import formStyles from '../styles/form.module.scss'
+import formStyles from '../styles/form.module.scss';
+
+//Utils
+import {designersPositions} from '../utils/designersPositions';
 
 
 const MainForm = ({ title, number }) => {
+
+  const [formikInitialValues, setformikInitialValues] = useState({ firstname: '', surname: '', email: '', phone: '', hours: [{value:0, position:'Starszy projektant'},{value:0, position:'Starszy projektant'}], message: '', additionalInfo: '' })
+
+  const [designerPositionValue, setdesignerPositionValue] = useState(designersPositions.elderDesigner)
 
   const buttonText = useRef(null);
   const buttonProgress = useRef(null);
@@ -28,7 +40,7 @@ const MainForm = ({ title, number }) => {
   }
 
   const formik = useFormik({
-    initialValues: { firstname: '', surname: '', email: '', phone: '', hours: '', message: '', additionalInfo: '' },
+    initialValues: {...formikInitialValues},
     onSubmit: values => {
       buttonProgress.current.style.display = "block"
       buttonText.current.style.display = "none";
@@ -38,20 +50,13 @@ const MainForm = ({ title, number }) => {
     }
   });
 
-  const hoursPopover = (
-    <Popover id="hoursPopover">
-      <Popover.Title as="h3">Ilość godzin spędzonych przy dodatkowej pracy projektowej</Popover.Title>
-      <Popover.Content>
-        Proszę wpisać orientacyjną liczbę godzin wszystkich prac dodatkowych dla przedmiotowej zmiany w projekcie.
-      </Popover.Content>
-    </Popover>
-  )
-
-  const hoursTooltip = (
-    <OverlayTrigger trigger="click" placement="right" overlay={hoursPopover}>
-      <span className={formStyles.helper}>?</span>
-    </OverlayTrigger>
-  )
+  const addHoursInput = async (e) => {
+    e.preventDefault();
+    const newVal = {...formik.values};
+    newVal.hours.push({value:0,position: designerPositionValue, id: uid()});
+    setformikInitialValues(newVal);
+    setdesignerPositionValue(designersPositions.elderDesigner)
+  }
 
   return (
     <form onSubmit={formik.handleSubmit} className={formStyles.form}>
@@ -93,18 +98,18 @@ const MainForm = ({ title, number }) => {
         />
       </div>
       <h3>Wywiad prac dodatkowych</h3>
+      <HoursInputs inputsAmount={formikInitialValues.hours} formik={formik}/>
       <div>
-        {hoursTooltip}
-        <label htmlFor="hours">
-          Ilość godzin:
-        </label>
-        <input
-          id="hours"
-          type="number"
-          min="0"
-          onChange={formik.handleChange}
-          value={formik.values.hours}
-        />
+        <select name="" id="" value={designerPositionValue} onChange={(e)=>{
+          setdesignerPositionValue(e.target.value)
+        }}>
+          <option value={designersPositions.elderDesigner}>{designersPositions.elderDesigner}</option>
+          <option value={designersPositions.designer}>{designersPositions.designer}</option>
+          <option value={designersPositions.elderAssistant}>{designersPositions.elderAssistant}</option>
+          <option value={designersPositions.assistant}>{designersPositions.assistant}</option>
+          <option value={designersPositions.lesserAssistant}>{designersPositions.lesserAssistant}</option>
+        </select>
+        <button onClick={addHoursInput}>Dodaj stanowisko</button>
       </div>
       <div>
         <label htmlFor="mesage">Opis prac:</label>
@@ -115,6 +120,7 @@ const MainForm = ({ title, number }) => {
         />
       </div>
       <div>
+        <Helper popoverTitle={"Ilość godzin spędzonych przy dodatkowej pracy projektowej"} popoverContent={"Proszę wpisać orientacyjną liczbę godzin wszystkich prac dodatkowych dla przedmiotowej zmiany w projekcie."}/>
         <label htmlFor="additionalInfo">Dodatkowe informacje:</label>
         <textarea
           id="additionalInfo"

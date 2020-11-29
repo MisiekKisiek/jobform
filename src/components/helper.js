@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Bootstrap
-import { Form as FormBootstrap, Spinner, OverlayTrigger, Popover, Button } from 'react-bootstrap';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 //Styles
 import formStyles from '../styles/form.module.scss';
